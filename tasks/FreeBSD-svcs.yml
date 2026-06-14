@@ -1,0 +1,15 @@
+# tasks file for setup-wayland
+- name: ensure the service(s) are enabled (FreeBSD)
+  loop:
+    "{{ setup_wayland_sysrc_arguments }}"
+  community.general.sysrc:
+    name: "{{ item['service'] }}"
+    value: "{{ item['value'] }}"
+    state: present
+
+- name: ensure the service is started (FreeBSD)
+  loop:
+    "{{ setup_wayland_services }}"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started

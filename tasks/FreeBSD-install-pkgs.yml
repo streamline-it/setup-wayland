@@ -1,0 +1,7 @@
+# tasks file for setup-wayland
+- name: ensure wayland packages are installed 
+  loop:
+    "{{ setup_wayland_pkgs }}"
+  community.general.pkgng:
+    name: "{{ item }}"
+    state: present

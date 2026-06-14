@@ -1,0 +1,35 @@
+---
+# tasks file for setup-wayland
+- name: make sure user isn't already setup for gui use
+  register: setup_wayland_group_check
+  changed_when: false
+  loop:
+    "{{ setup_wayland_users }}"
+  ansible.builtin.command:
+    cmd: "id {{ item['username'] }}"
+#
+# Multiple users
+#
+- name: ensure user is member of the video group (multiple users)
+  debugger: on_failed
+  loop:
+    "{{ setup_wayland_users }}"
+  loop_control:
+    index_var: setup_wayland_loop_index
+  when:
+    - setup_wayland_users | length > 1
+    - "'video' not in setup_wayland_group_check['results'][setup_wayland_loop_index]['stdout']"
+  ansible.builtin.command:
+    cmd: "pw groupmod -n video -m {{ item['username'] }}"
+
+#
+# single user
+#
+
+- name: ensure user is member of the video group (single user)
+  debugger: on_failed
+  when:
+    - setup_wayland_users | length == 1
+    - "'video' not in setup_wayland_group_check['results'][0]['stdout']"
+  ansible.builtin.command:
+    cmd: "pw groupmod -n video -m {{ setup_wayland_users[0]['username'] }}"

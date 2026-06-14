@@ -1,0 +1,5 @@
+---
+# handlers file for setup-wayland
+- name: FreeBSD reboot host
+  ansible.builtin.reboot:
+    msg: "Ansible rebooting host"

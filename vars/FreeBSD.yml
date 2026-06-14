@@ -1,0 +1,10 @@
+setup_wayland_pkgs:
+  - wayland
+  - seatd
+
+setup_wayland_services:
+  - seatd
+
+setup_wayland_sysrc_arguments:
+  - service: seatd_enable
+    value: "YES"

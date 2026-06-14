@@ -1,0 +1,21 @@
+---
+# tasks file for setup-wayland
+- name: import os specific variables
+  ansible.builtin.include_vars: "./vars/{{ ansible_os_family }}.yml"
+
+- name: call task(s) to check assertions
+  ansible.builtin.include_tasks: asserts.yml
+
+- name: call tasks to ensure wayland packages are installed 
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}-install-pkgs.yml"
+
+- name: call task to ensure the driver is setup
+  when: ansible_os_family == "FreeBSD"
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}-setup-driver.yml"
+
+- name: call task to ensure the user is part of the video group
+  when: ansible_os_family == "FreeBSD"
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}-setup-user.yml"
+- name: include tasks to ensure the service is enabled/started
+
+  ansible.builtin.include_tasks: "{{ ansible_os_family }}-svcs.yml"

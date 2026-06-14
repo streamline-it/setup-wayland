@@ -1,0 +1,16 @@
+---
+# tasks file for setup-wayland
+- name: ensure the driver is enabled in rc.conf
+  notify: FreeBSD reboot host
+  loop:
+    "{{ setup_wayland_sysrc_driver_directive }}"
+  community.general.sysrc:
+    name: "{{ item['name'] }}"
+    value: "{{ item['value'] }}"
+    state: present
+    
+- name: add the driver to the loader.conf config
+  notify: FreeBSD reboot host
+  ansible.builtin.lineinfile:
+    path: /boot/loader.conf
+    line: "{{ setup_wayland_driver_name }}_load=\"YES\""

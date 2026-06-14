@@ -1,0 +1,21 @@
+---
+# defaults file for setup-wayland
+
+# user allowed to use the gui
+setup_wayland_users:
+  - username: 
+
+# name of the driver
+setup_wayland_driver_name:
+# package name for the driver
+setup_wayland_pkg:
+ 
+# driver directive in /etc/rc.conf
+# Ex.
+# setup_gui_environment_sysrc_directive:
+#   - name: kld_list
+#     value: "{{ setup_wayland_driver_name }}"
+
+setup_wayland_sysrc_driver_directive:
+  - name: 
+    value:

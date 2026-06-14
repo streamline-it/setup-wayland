@@ -1,0 +1,16 @@
+- name: assertions todo
+  ansible.builtin.assert:
+    that:
+      - setup_wayland_pkgs is defined
+      - setup_wayland_pkgs is truthy
+      - setup_wayland_services is defined
+      - setup_wayland_services is truthy
+      - setup_wayland_sysrc_arguments is defined
+      - setup_wayland_sysrc_arguments is truthy
+      - setup_wayland_users is defined
+      - setup_wayland_users is truthy
+      - setup_wayland_driver_name is defined
+      - setup_wayland_driver_name is truthy
+      - setup_wayland_sysrc_driver_directive is defined
+      - setup_wayland_sysrc_driver_directive is truthy
+    fail_msg: "Ensure these variables are defined and have values"

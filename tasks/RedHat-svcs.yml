@@ -1,0 +1,8 @@
+# tasks file for setup-wayland
+- name: ensure services are enabled/started 
+  loop:
+    "{{ setup_wayland_services }}"
+  ansible.builtin.package:
+    name: "{{ item }}"
+    enabled: true 
+    state: started
