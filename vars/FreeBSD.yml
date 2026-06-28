@@ -4,7 +4,10 @@ setup_wayland_pkgs:
 
 setup_wayland_services:
   - seatd
+  - dbus
 
 setup_wayland_sysrc_arguments:
   - service: seatd_enable
+    value: "YES"
+  - service: dbus_enable
     value: "YES"

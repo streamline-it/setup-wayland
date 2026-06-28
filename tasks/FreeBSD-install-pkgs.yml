@@ -5,3 +5,8 @@
   community.general.pkgng:
     name: "{{ item }}"
     state: present
+
+- name: ensure driver packages are installed 
+  community.general.pkgng:
+    name: "{{ setup_wayland_driver_pkg }}"
+    state: present
